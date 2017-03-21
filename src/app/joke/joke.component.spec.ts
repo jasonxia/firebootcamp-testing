@@ -45,10 +45,13 @@ describe(`Component: JokeComponent`, () => {
 
         fixture.detectChanges();
 
-        expect(component.joke).toEqual('FAKE JOKE');
+        let jokeText;
+        component.joke.subscribe(joke => jokeText = joke);
+
+        expect(jokeText).toEqual('FAKE JOKE');
     });
 
-    fit(`should have the joke content bound to the the page`, () => {
+    it(`should have the joke content bound to the the page`, () => {
         const spy = spyOn(jokeService, 'getJoke')
             .and.returnValue(Observable.of('FAKE JOKE'));
 
